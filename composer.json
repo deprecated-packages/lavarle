@@ -1,6 +1,6 @@
 {
     "name": "tomasvotruba/lavarle",
-    "description": "Handy sexy utils for Laravel that will get you excited about coding",
+    "description": "Sexy Utils for Laravel projects",
     "keywords": ["laravel", "tools"],
     "license": "MIT",
     "require": {

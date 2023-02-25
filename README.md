@@ -1,4 +1,4 @@
-# Handy sexy utils for Laravel that will get you Excited about Coding
+# Sexy Utils for Laravel projects
 
 ## Installation
 
