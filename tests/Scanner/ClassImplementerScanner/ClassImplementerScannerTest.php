@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TomasVotruba\Lavarle\Tests\Scanner\ClassImplementerScanner;
 
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\TestCase;
 use TomasVotruba\Lavarle\Scanner\ClassImlementerScanner;
 use TomasVotruba\Lavarle\Tests\Scanner\ClassImplementerScanner\Fixture\SomeInterface;
@@ -18,5 +19,14 @@ final class ClassImplementerScannerTest extends TestCase
         );
 
         $this->assertCount(1, $classImplementers);
+    }
+
+    #[DoesNotPerformAssertions]
+    public function testIgnoreNonExistingDirectory(): void
+    {
+        ClassImlementerScanner::findImplementers(
+            [__DIR__ . '/missing'],
+            SomeInterface::class
+        );
     }
 }

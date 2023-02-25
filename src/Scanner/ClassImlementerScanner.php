@@ -18,8 +18,13 @@ final class ClassImlementerScanner
      */
     public static function findImplementers(array $directories, string $interfaceClass): array
     {
+        $existingDirectories = array_filter($directories, 'file_exists');
+        if ($existingDirectories === []) {
+            return [];
+        }
+
         $robotLoader = new RobotLoader();
-        $robotLoader->addDirectory(...$directories);
+        $robotLoader->addDirectory(...$existingDirectories);
         $robotLoader->setTempDirectory(sys_get_temp_dir() . '/laravel-robot-loader');
         $robotLoader->refresh();
 
