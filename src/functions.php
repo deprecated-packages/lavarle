@@ -30,12 +30,18 @@ function tag_directory_by_interface(
     $robotLoader->setTempDirectory(sys_get_temp_dir() . '/laravel-robot-loader');
     $robotLoader->refresh();
 
-    collect($robotLoader->getIndexedClasses())
-        ->keys()
-        ->reject(static fn (string $class): bool => $class === $interface)
+    $classes = array_keys($robotLoader->getIndexedClasses());
+
+    $implementerClasses = collect($classes)
+        // skip itself
+        ->filter(static fn (string $class): bool => $class !== $interface)
         ->filter(static fn (string $class): bool => is_a($class, $interface, true))
-        ->each(static fn (string $class) => $application->singleton($class))
-        ->each(static fn (string $class) => $application->tag([$class], $interface));
+        ->toArray();
+
+    foreach ($implementerClasses as $implementerClass) {
+      $application->singleton($implementerClass);
+      $application->tag([$implementerClass], $interface);
+    }
 }
 
 /**
@@ -51,6 +57,7 @@ function autowire_by_type(string $type): array
         base_path('packages'),
         base_path('src'),
     ], app(), $type);
+
     /** @var RewindableGenerator<TType> $taggedIterator */
     $taggedIterator = app()->tagged($type);
     return iterator_to_array($taggedIterator);

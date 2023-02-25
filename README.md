@@ -1,4 +1,4 @@
-# Handy Laravel functions that will come handy
+# Handy sexy utils for Laravel that will get you Excited about Coding
 
 ## Installation
 
