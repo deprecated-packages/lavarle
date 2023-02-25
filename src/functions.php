@@ -39,8 +39,8 @@ function tag_directory_by_interface(
         ->toArray();
 
     foreach ($implementerClasses as $implementerClass) {
-      $application->singleton($implementerClass);
-      $application->tag([$implementerClass], $interface);
+        $application->singleton($implementerClass);
+        $application->tag([$implementerClass], $interface);
     }
 }
 
