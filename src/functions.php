@@ -17,6 +17,14 @@ function tag_directory_by_interface(
     Application $application,
     string $interface
 ): void {
+    // keep only existing directories
+    $directories = array_filter($directories, 'file_exists');
+
+    // nothing to iterate
+    if ($directories === []) {
+        return;
+    }
+
     $robotLoader = new RobotLoader();
     $robotLoader->addDirectory(...$directories);
     $robotLoader->setTempDirectory(sys_get_temp_dir() . '/laravel-robot-loader');
@@ -38,11 +46,11 @@ function tag_directory_by_interface(
 function autowire_by_type(string $type): array
 {
     tag_directory_by_interface([
+        // typical locations
         base_path('app'),
         base_path('packages'),
         base_path('src'),
     ], app(), $type);
-
     /** @var RewindableGenerator<TType> $taggedIterator */
     $taggedIterator = app()->tagged($type);
     return iterator_to_array($taggedIterator);
