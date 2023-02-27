@@ -27,7 +27,7 @@ function tag_directory_by_interface(
 
     $robotLoader = new RobotLoader();
     $robotLoader->addDirectory(...$directories);
-    $robotLoader->setTempDirectory(sys_get_temp_dir() . '/laravel-robot-loader');
+    $robotLoader->setTempDirectory(storage_path('laravel-robot-loader'));
     $robotLoader->refresh();
 
     $classes = array_keys($robotLoader->getIndexedClasses());
