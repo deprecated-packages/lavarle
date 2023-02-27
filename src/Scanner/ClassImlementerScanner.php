@@ -25,7 +25,7 @@ final class ClassImlementerScanner
 
         $robotLoader = new RobotLoader();
         $robotLoader->addDirectory(...$existingDirectories);
-        $robotLoader->setTempDirectory(sys_get_temp_dir() . '/laravel-robot-loader');
+        $robotLoader->setTempDirectory(storage_path('robot-loader'));
         $robotLoader->refresh();
 
         $classes = array_keys($robotLoader->getIndexedClasses());

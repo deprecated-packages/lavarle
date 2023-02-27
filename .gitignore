@@ -2,3 +2,6 @@
 
 /vendor
 composer.lock
+
+# localhost storage
+/tests/Functions/storage

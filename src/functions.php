@@ -6,7 +6,7 @@ namespace TomasVotruba\Lavarle;
 
 use Illuminate\Container\RewindableGenerator;
 use Illuminate\Contracts\Foundation\Application;
-use Nette\Loaders\RobotLoader;
+use TomasVotruba\Lavarle\Scanner\ClassImlementerScanner;
 
 /**
  * @param string[] $directories
@@ -25,18 +25,7 @@ function tag_directory_by_interface(
         return;
     }
 
-    $robotLoader = new RobotLoader();
-    $robotLoader->addDirectory(...$directories);
-    $robotLoader->setTempDirectory(storage_path('laravel-robot-loader'));
-    $robotLoader->refresh();
-
-    $classes = array_keys($robotLoader->getIndexedClasses());
-
-    $implementerClasses = collect($classes)
-        // skip itself
-        ->filter(static fn (string $class): bool => $class !== $interface)
-        ->filter(static fn (string $class): bool => is_a($class, $interface, true))
-        ->toArray();
+    $implementerClasses = ClassImlementerScanner::findImplementers($directories, $interface);
 
     foreach ($implementerClasses as $implementerClass) {
         $application->singleton($implementerClass);
