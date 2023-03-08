@@ -6,14 +6,14 @@ namespace TomasVotruba\Lavarle\Tests\Scanner\ClassImplementerScanner;
 
 use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\TestCase;
-use TomasVotruba\Lavarle\Scanner\ClassImlementerScanner;
+use TomasVotruba\Lavarle\Scanner\ClassImplementerScanner;
 use TomasVotruba\Lavarle\Tests\Scanner\ClassImplementerScanner\Fixture\SomeInterface;
 
 final class ClassImplementerScannerTest extends TestCase
 {
     public function test(): void
     {
-        $classImplementers = ClassImlementerScanner::findImplementers(
+        $classImplementers = ClassImplementerScanner::findImplementers(
             [__DIR__ . '/Fixture'],
             SomeInterface::class
         );
@@ -24,7 +24,7 @@ final class ClassImplementerScannerTest extends TestCase
     #[DoesNotPerformAssertions]
     public function testIgnoreNonExistingDirectory(): void
     {
-        ClassImlementerScanner::findImplementers(
+        ClassImplementerScanner::findImplementers(
             [__DIR__ . '/missing'],
             SomeInterface::class
         );

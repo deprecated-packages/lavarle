@@ -10,7 +10,7 @@ use Webmozart\Assert\Assert;
 /**
  * @see \TomasVotruba\Lavarle\Tests\Scanner\ClassImplementerScanner\ClassImplementerScannerTest
  */
-final class ClassImlementerScanner
+final class ClassImplementerScanner
 {
     /**
      * @param string[] $directories
