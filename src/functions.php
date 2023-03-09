@@ -6,7 +6,7 @@ namespace TomasVotruba\Lavarle;
 
 use Illuminate\Container\RewindableGenerator;
 use Illuminate\Contracts\Foundation\Application;
-use TomasVotruba\Lavarle\Scanner\ClassImlementerScanner;
+use TomasVotruba\Lavarle\Scanner\ClassImplementerScanner;
 
 /**
  * @param string[] $directories
@@ -25,7 +25,7 @@ function tag_directory_by_interface(
         return;
     }
 
-    $implementerClasses = ClassImlementerScanner::findImplementers($directories, $interface);
+    $implementerClasses = ClassImplementerScanner::findImplementers($directories, $interface);
 
     foreach ($implementerClasses as $implementerClass) {
         $application->singleton($implementerClass);
