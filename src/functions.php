@@ -6,7 +6,22 @@ namespace TomasVotruba\Lavarle;
 
 use Illuminate\Container\RewindableGenerator;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Controller;
+use Illuminate\Routing\Redirector;
 use TomasVotruba\Lavarle\Scanner\ClassImplementerScanner;
+
+/**
+ * @param class-string<Controller> $action
+ * @param array<string, mixed> $parameters
+ */
+function to_action(string $action, array $parameters = []): RedirectResponse
+{
+    /** @var Redirector $redirector */
+    $redirector = redirect();
+
+    return $redirector->action($action, $parameters);
+}
 
 /**
  * @param string[] $directories
